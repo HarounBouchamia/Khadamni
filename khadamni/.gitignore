@@ -1,0 +1,5 @@
+"# Ignore compiled Java classes" 
+"*.class" 
+ECHO is on.
+"# Ignore IntelliJ IDEA project files" 
+".idea/" 
