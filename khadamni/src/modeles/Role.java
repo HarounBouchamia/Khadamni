@@ -1,40 +1,17 @@
 package modeles;
 
-public class Role {
+public enum Role {
+    ADMIN(1),
+    CLIENT(2),
+    FREELANCER(3);
 
-    private int idRole;
-    private String roleName;
+    private final int id;
 
-    public Role() {
+    Role(int id) {
+        this.id = id;
     }
 
-    public Role(int idRole, String roleName) {
-        this.idRole = idRole;
-        this.roleName = roleName;
-    }
-
-    public int getIdRole() {
-        return idRole;
-    }
-
-    public void setIdRole(int idRole) {
-        this.idRole = idRole;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "idRole=" + idRole +
-                ", roleName='" + roleName + '\'' +
-                '}';
+    public int getId() {
+        return id;
     }
 }
-

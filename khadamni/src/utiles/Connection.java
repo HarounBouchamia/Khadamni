@@ -7,7 +7,7 @@ public class Connection {
     public static final String USERNAME = "root";
     public static final String PASSWORD = "";
 
-    private java.sql.Connection connection;
+    private static java.sql.Connection connection;
 
     public Connection() {
         try {
@@ -23,12 +23,12 @@ public class Connection {
     }
 
     // Getter method to access the connection
-    public java.sql.Connection getConnection() {
+    public static java.sql.Connection getConnection() {
         return connection;
     }
 
     // Close the connection
-    public void closeConnection() {
+    public static void closeConnection() {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();

@@ -20,13 +20,12 @@ public class User {
     public User() {
     }
 
-    public User(int idUser, String userName, String email, int number, String status, File resumeFile, BufferedImage image, String skills, Role role) {
+    public User(int idUser, String userName, String email, int number, String status, BufferedImage image, String skills, Role role) {
         this.idUser = idUser;
         this.userName = userName;
         this.email = email;
         this.number = number;
         this.status = status;
-        this.resumeFile = resumeFile;
         this.image = image;
         this.skills = skills;
         this.role = role;
@@ -72,13 +71,6 @@ public class User {
         this.status = status;
     }
 
-    public File getResumeFile() {
-        return resumeFile;
-    }
-
-    public void setResumeFile(File resumeFile) {
-        this.resumeFile = resumeFile;
-    }
 
     public BufferedImage getImage() {
         return image;
@@ -112,7 +104,6 @@ public class User {
                 ", email='" + email + '\'' +
                 ", number=" + number +
                 ", status='" + status + '\'' +
-                ", resumeFile=" + resumeFile +
                 ", image=" + image +
                 ", skills=" + skills +
                 ", role=" + role +
