@@ -1,6 +1,7 @@
 package gui;
 
 import modeles.Contrat;
+import utiles.Connection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,14 +9,11 @@ import java.util.List;
 
 public class ContratCrud {
 
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/votre_base_de_donnees";
-    private static final String USERNAME = "votre_nom_utilisateur";
-    private static final String PASSWORD = "votre_mot_de_passe";
+
 
     public static void createContrat(Contrat contrat) {
-        try (Connection conn = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
-             PreparedStatement preparedStatement = conn.prepareStatement(
-                     "INSERT INTO contrats (titreContrat, statutContrat, descriptionContrat, idUsers, idOffre) VALUES (?, ?, ?, ?, ?)",
+        try (java.sql.Connection conn = Connection.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO contrats (titreContrat, statutContrat, descriptionContrat, idUsers, idOffre) VALUES (?, ?, ?, ?, ?)",
                      Statement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setString(1, contrat.getTitreContrat());
@@ -26,7 +24,6 @@ public class ContratCrud {
 
             preparedStatement.executeUpdate();
 
-            // Récupérer l'ID généré pour le nouveau contrat
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 int generatedId = generatedKeys.getInt(1);
@@ -41,7 +38,7 @@ public class ContratCrud {
 
     public static Contrat getContratById(int contratId) {
         Contrat contrat = null;
-        try (Connection conn = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+        try (java.sql.Connection conn = Connection.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM contrats WHERE idContrat = ?")) {
 
             preparedStatement.setInt(1, contratId);
@@ -59,7 +56,7 @@ public class ContratCrud {
 
     public static List<Contrat> getAllContrats() {
         List<Contrat> contrats = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+        try (java.sql.Connection conn = Connection.getConnection();
              Statement statement = conn.createStatement()) {
 
             ResultSet resultSet = statement.executeQuery("SELECT * FROM contrats");
@@ -75,7 +72,7 @@ public class ContratCrud {
     }
 
     public static void updateContrat(Contrat contrat) {
-        try (Connection conn = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+        try (java.sql.Connection conn = Connection.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(
                      "UPDATE contrats SET titreContrat=?, statutContrat=?, descriptionContrat=?, idUsers=?, idOffre=? WHERE idContrat=?")) {
 
@@ -99,7 +96,7 @@ public class ContratCrud {
     }
 
     public static void deleteContrat(int contratId) {
-        try (Connection conn = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+        try (java.sql.Connection conn = Connection.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM contrats WHERE idContrat=?")) {
 
             preparedStatement.setInt(1, contratId);

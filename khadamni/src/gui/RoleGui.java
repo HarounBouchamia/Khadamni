@@ -1,11 +1,7 @@
 package gui;
 
-import modeles.Role;
-
 
 import java.sql.*;
-import java.util.*;
-import utiles.Connection.*;
 
 public class RoleGui {
     private static final String url = "jdbc:mysql://localhost:3306/khadamni";
